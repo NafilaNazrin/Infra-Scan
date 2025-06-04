@@ -1,0 +1,16 @@
+[
+    {
+        "image": "20250604103623_image4.png",
+        "prediction": "Detected",
+        "latitude": "12.97154636288685",
+        "longitude": "80.04262833412143",
+        "predicted_image": "static/predictions/exp/20250604103623_image4.png"
+    },
+    {
+        "image": "20250604103808_image6.jpg",
+        "prediction": "Detected",
+        "latitude": "12.971546142652336",
+        "longitude": "80.04262597283703",
+        "predicted_image": "static/predictions/exp/20250604103808_image6.jpg"
+    }
+]
