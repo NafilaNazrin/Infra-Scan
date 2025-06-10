@@ -1,30 +1,32 @@
+from flask import Flask, render_template, request, jsonify
 import pathlib
 import sys
-
-# Fix: Make PosixPath map to WindowsPath if running on Windows
-if sys.platform == "win32":
-    pathlib.PosixPath = pathlib.WindowsPath
-
-from flask import Flask, render_template, request, jsonify
-import os, json, glob
+import os, json
 from werkzeug.utils import secure_filename
 from pathlib import Path
 from datetime import datetime
-import sys
 
-# Add yolov5 to Python path
+# Fix path compatibility for Windows
+if sys.platform == "win32":
+    pathlib.PosixPath = pathlib.WindowsPath
+
+# Append YOLO path
 sys.path.append('yolov5')
-from detect import run  # YOLOv5 detect function
+from detect import run  # Assuming your yolov5/detect.py is correct
 
+# Flask App Setup
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
-app.config['PREDICT_FOLDER'] = 'static/predictions'
+app.config['PREDICT_FOLDER'] = 'static/predicted'
+REPORTS_FILE = 'reports.json'
+WEIGHTS_PATH = 'best.pt'
+CLASS_NAMES = ["Pothole", "Crack", "Other Damage"]
+
+# Ensure folders exist
 Path(app.config['UPLOAD_FOLDER']).mkdir(parents=True, exist_ok=True)
 Path(app.config['PREDICT_FOLDER']).mkdir(parents=True, exist_ok=True)
 
-REPORTS_FILE = 'reports.json'
-WEIGHTS_PATH = 'best.pt'  # Your YOLO model
-
+# Save report data locally
 def save_report(data):
     if not os.path.exists(REPORTS_FILE):
         with open(REPORTS_FILE, 'w') as f:
@@ -39,6 +41,14 @@ def save_report(data):
 def index():
     return render_template('index.html')
 
+@app.route('/report')
+def report():
+    return render_template('report.html')
+
+@app.route('/view')
+def view():
+    return render_template('view.html')
+
 @app.route('/upload', methods=['POST'])
 def upload():
     image = request.files['image']
@@ -48,46 +58,50 @@ def upload():
     if not lat or not lon:
         return jsonify({'error': 'Location not provided or denied by browser'}), 400
 
-    # Save uploaded image
+    # Save original image
     filename = datetime.now().strftime("%Y%m%d%H%M%S_") + secure_filename(image.filename)
     image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     image.save(image_path)
 
-    # Clean old prediction folders if needed (optional)
-    # for f in glob.glob(os.path.join(app.config['PREDICT_FOLDER'], 'exp*')):
-    #     shutil.rmtree(f)
-
-    # Run detection
+    # Run YOLOv5
     run(
         weights=WEIGHTS_PATH,
         source=image_path,
         project=app.config['PREDICT_FOLDER'],
-        name='exp',            # Will save in static/predictions/exp/
+        name='exp',
         exist_ok=True,
-        save_txt=False,
+        save_txt=True,
         save_conf=True,
         save_crop=False,
-        # save_img=True         # Critical: save output image
     )
 
-    # Find the detected image path
-    output_folder = os.path.join(app.config['PREDICT_FOLDER'], 'exp')
-    predicted_image_path = os.path.join(output_folder, filename)
+    # Find prediction result image
+    exp_folder = os.path.join(app.config['PREDICT_FOLDER'], 'exp')
+    predicted_image_path = os.path.join(exp_folder, filename)
 
-    # Check if YOLO saved the result image
-    if not os.path.exists(predicted_image_path):
-        return jsonify({'error': 'Detection failed or no objects found'}), 500
+    # Get labels from TXT file
+    label_file = os.path.join(exp_folder, 'labels', os.path.splitext(filename)[0] + '.txt')
+    detected_classes = []
 
-    # Save report
+    if os.path.exists(label_file):
+        with open(label_file, 'r') as f:
+            for line in f:
+                class_id = int(line.strip().split()[0])
+                class_name = CLASS_NAMES[class_id] if class_id < len(CLASS_NAMES) else f"Class {class_id}"
+                detected_classes.append(class_name)
+
+    detected_str = ', '.join(sorted(set(detected_classes))) if detected_classes else "No Damage Detected"
+
+    # Build report
     report = {
         "image": filename,
-        "prediction": "Detected",  # Can be improved to actual class
-        "latitude": lat,
-        "longitude": lon,
-        "predicted_image": predicted_image_path.replace('\\', '/')
+        "prediction": detected_str,
+        "latitude": float(lat),
+        "longitude": float(lon),
+        "predicted_image": f"predicted/exp/{filename}"
     }
-    save_report(report)
 
+    save_report(report)
     return jsonify(report)
 
 @app.route('/reports')
@@ -95,8 +109,7 @@ def reports():
     if not os.path.exists(REPORTS_FILE):
         return jsonify([])
     with open(REPORTS_FILE, 'r') as f:
-        data = json.load(f)
-    return jsonify(data)
+        return jsonify(json.load(f))
 
 if __name__ == '__main__':
     app.run(debug=True)
