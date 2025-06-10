@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Report Damage – InfraScan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { padding: 10px 20px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h2>Upload Road Damage</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="image" required><br><br>
+        <input type="hidden" name="latitude" id="latitude">
+        <input type="hidden" name="longitude" id="longitude">
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        const latInput = document.getElementById('latitude');
+        const lonInput = document.getElementById('longitude');
+
+        navigator.geolocation.getCurrentPosition(
+            pos => {
+                latInput.value = pos.coords.latitude.toFixed(8);
+                lonInput.value = pos.coords.longitude.toFixed(8);
+            },
+            err => {
+                alert("Location access denied.");
+            }
+        );
+
+        document.getElementById('uploadForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const res = await fetch('/upload', { method: 'POST', body: formData });
+            const data = await res.json();
+            alert(data.prediction || "No prediction.");
+            location.reload();
+        };
+    </script>
+</body>
+</html>

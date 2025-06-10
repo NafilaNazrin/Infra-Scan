@@ -1,68 +1,152 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>InfraScan – Road Damage Reporter</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <title>InfraScan – Road Damage Detection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
-        #map { height: 400px; width: 100%; }
-        body { font-family: Arial; padding: 20px; }
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f7f9fc;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        input[type="file"] {
+            padding: 10px;
+        }
+        button {
+            background-color: #0066ff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #004fcc;
+        }
+        #result {
+            display: none;
+            margin-top: 30px;
+        }
+        .result-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .result-grid img {
+            width: 100%;
+            max-width: 420px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        #map {
+            height: 300px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+        p, h3, h4 {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
-    <h2>Upload Road Damage</h2>
-    <form id="uploadForm" enctype="multipart/form-data">
-        <input type="file" name="image" required><br><br>
-        <input type="hidden" name="latitude" id="latitude">
-        <input type="hidden" name="longitude" id="longitude">
-        <button type="submit">Submit</button>
-    </form>
+    <div class="container">
+        <h1>InfraScan – Report Road Damage</h1>
 
-    <h2>Damage Locations</h2>
-    <div id="map"></div>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" name="image" id="imageInput" accept="image/*" required><br><br>
+            <input type="hidden" name="latitude" id="latitude">
+            <input type="hidden" name="longitude" id="longitude">
+            <button type="submit">Upload & Detect</button>
+        </form>
+
+        <div id="result">
+            <h3>Detection Result:</h3>
+            <p><strong>Defect Type:</strong> <span id="defectType"></span></p>
+
+            <div class="result-grid">
+                <div>
+                    <h4>Original Image</h4>
+                    <img id="originalImage" src="" alt="Original Image">
+                </div>
+                <div>
+                    <h4>Detected Output</h4>
+                    <img id="predictedImage" src="" alt="Detection Output Image">
+                </div>
+            </div>
+
+            <h4>Detected Location:</h4>
+            <div id="map"></div>
+        </div>
+    </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        const form = document.getElementById('uploadForm');
-        const latInput = document.getElementById('latitude');
-        const lonInput = document.getElementById('longitude');
+        let latitude = null, longitude = null;
 
-        navigator.geolocation.getCurrentPosition(
-            pos => {
-                latInput.value = pos.coords.latitude;
-                lonInput.value = pos.coords.longitude;
-            },
-            err => {
-                alert("Could not get location automatically. You will have to enter it manually.");
-            }
-        );
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            latitude = pos.coords.latitude;
+            longitude = pos.coords.longitude;
+            document.getElementById("latitude").value = latitude;
+            document.getElementById("longitude").value = longitude;
+        }, function(error) {
+            alert("Location access denied. Please allow location access to proceed.");
+        });
 
-        form.onsubmit = async (e) => {
+        document.getElementById("uploadForm").addEventListener("submit", function(e) {
             e.preventDefault();
-            const formData = new FormData(form);
+            const formData = new FormData(this);
 
-            const res = await fetch('/upload', { method: 'POST', body: formData });
-            const data = await res.json();
-            alert("Uploaded: " + data.prediction);
-
-            location.reload();
-        };
-
-        const map = L.map('map').setView([20, 78], 5);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-        fetch('/reports')
+            fetch("/upload", {
+                method: "POST",
+                body: formData
+            })
             .then(res => res.json())
             .then(data => {
-                data.forEach(report => {
-                    if (report.latitude && report.longitude) {
-                        const marker = L.marker([report.latitude, report.longitude]).addTo(map);
-                        marker.bindPopup(`<b>${report.prediction}</b><br><img src="static/uploads/${report.image}" width="100" />`);
-                        
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
 
-                    }
-                });
+                document.getElementById("result").style.display = "block";
+                document.getElementById("defectType").innerText = data.prediction;
+                document.getElementById("originalImage").src = `/static/uploads/${data.image}`;
+                document.getElementById("predictedImage").src = `/static/${data.predicted_image}`;
+
+                const map = L.map('map').setView([data.latitude, data.longitude], 15);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(map);
+
+                const marker = L.marker([data.latitude, data.longitude]).addTo(map);
+                marker.bindPopup(`<b>Damage:</b> ${data.prediction}`).openPopup();
+            })
+            .catch(err => {
+                console.error(err);
+                alert("An error occurred during upload.");
             });
+        });
     </script>
 </body>
 </html>
