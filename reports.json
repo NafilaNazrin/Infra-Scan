@@ -243,5 +243,19 @@
         "latitude": 13.071581520779407,
         "longitude": 80.26574013111147,
         "predicted_image": "predicted/exp/20250613004728_WhatsApp_Image_2025-06-05_at_13.50.09_78c0b5bd.jpg"
+    },
+    {
+        "image": "20250613215342_WhatsApp_Image_2025-06-05_at_13.50.09_62397baa.jpg",
+        "prediction": "Pothole",
+        "latitude": 13.07183758578222,
+        "longitude": 80.26581737981994,
+        "predicted_image": "predicted/exp/20250613215342_WhatsApp_Image_2025-06-05_at_13.50.09_62397baa.jpg"
+    },
+    {
+        "image": "20250613215345_WhatsApp_Image_2025-06-05_at_13.50.09_62397baa.jpg",
+        "prediction": "Pothole",
+        "latitude": 13.07183758578222,
+        "longitude": 80.26581737981994,
+        "predicted_image": "predicted/exp/20250613215345_WhatsApp_Image_2025-06-05_at_13.50.09_62397baa.jpg"
     }
 ]
