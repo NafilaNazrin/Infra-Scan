@@ -12,5 +12,236 @@
         "latitude": "12.971546142652336",
         "longitude": "80.04262597283703",
         "predicted_image": "static/predictions/exp/20250604103808_image6.jpg"
+    },
+    {
+        "image": "20250604133409_image4.png",
+        "prediction": "Detected",
+        "latitude": "12.97154951",
+        "longitude": "80.04262406",
+        "predicted_image": "static/predictions/exp/20250604133409_image4.png"
+    },
+    {
+        "image": "20250604133756_image5.jpg",
+        "prediction": "Detected",
+        "latitude": "12.97154399",
+        "longitude": "80.04262564",
+        "predicted_image": "static/predictions/exp/20250604133756_image5.jpg"
+    },
+    {
+        "image": "20250604135615_image5.jpg",
+        "prediction": "No Damage Detected",
+        "latitude": "12.97152128",
+        "longitude": "80.04260730",
+        "predicted_image": "static/predictions/exp/20250604135615_image5.jpg"
+    },
+    {
+        "image": "20250604135627_myimage1.png",
+        "prediction": "No Damage Detected",
+        "latitude": "12.97152818",
+        "longitude": "80.04260773",
+        "predicted_image": "static/predictions/exp/20250604135627_myimage1.png"
+    },
+    {
+        "image": "20250604135637_myimage2.jpg",
+        "prediction": "No Damage Detected",
+        "latitude": "12.97152818",
+        "longitude": "80.04260773",
+        "predicted_image": "static/predictions/exp/20250604135637_myimage2.jpg"
+    },
+    {
+        "image": "20250604140043_image4.png",
+        "prediction": "Pothole",
+        "latitude": "12.97154127",
+        "longitude": "80.04262846",
+        "predicted_image": "static/predictions/exp/20250604140043_image4.png"
+    },
+    {
+        "image": "20250604140305_myimage3.png",
+        "prediction": "No Damage Detected",
+        "latitude": "12.97154127",
+        "longitude": "80.04262846",
+        "predicted_image": "static/predictions/exp/20250604140305_myimage3.png"
+    },
+    {
+        "image": "20250604140314_myimage1.png",
+        "prediction": "Pothole",
+        "latitude": "12.97154917",
+        "longitude": "80.04261949",
+        "predicted_image": "static/predictions/exp/20250604140314_myimage1.png"
+    },
+    {
+        "image": "20250604140327_image6.jpg",
+        "prediction": "Crack",
+        "latitude": "12.97154917",
+        "longitude": "80.04261949",
+        "predicted_image": "static/predictions/exp/20250604140327_image6.jpg"
+    },
+    {
+        "image": "20250604140505_image6.jpg",
+        "prediction": "Crack",
+        "latitude": "12.97154917",
+        "longitude": "80.04261949",
+        "predicted_image": "static/predictions/exp/20250604140505_image6.jpg"
+    },
+    {
+        "image": "20250604142323_image4.png",
+        "prediction": "Pothole",
+        "latitude": "12.97152276",
+        "longitude": "80.04259725",
+        "predicted_image": "predictions/exp/20250604142323_image4.png"
+    },
+    {
+        "image": "20250605082911_image4.png",
+        "prediction": "Pothole",
+        "latitude": 12.97155249,
+        "longitude": 80.0426205,
+        "predicted_image": "predicted/exp/20250605082911_image4.png"
+    },
+    {
+        "image": "20250605083109_image4.png",
+        "prediction": "Pothole",
+        "latitude": 12.971555337838819,
+        "longitude": 80.04262489247353,
+        "predicted_image": "predicted/exp/20250605083109_image4.png"
+    },
+    {
+        "image": "20250605083413_image4.png",
+        "prediction": "Pothole",
+        "latitude": 12.971534281341532,
+        "longitude": 80.0425990070522,
+        "predicted_image": "predicted/exp/20250605083413_image4.png"
+    },
+    {
+        "image": "20250605083438_image4.png",
+        "prediction": "Pothole",
+        "latitude": 12.971534281341532,
+        "longitude": 80.0425990070522,
+        "predicted_image": "predicted/exp/20250605083438_image4.png"
+    },
+    {
+        "image": "20250605083440_image4.png",
+        "prediction": "Pothole",
+        "latitude": 12.971534281341532,
+        "longitude": 80.0425990070522,
+        "predicted_image": "predicted/exp/20250605083440_image4.png"
+    },
+    {
+        "image": "20250605083627_image6.jpg",
+        "prediction": "Crack",
+        "latitude": 12.9702877,
+        "longitude": 80.0412419,
+        "predicted_image": "predicted/exp/20250605083627_image6.jpg"
+    },
+    {
+        "image": "20250605084132_image4.png",
+        "prediction": "Pothole",
+        "latitude": 12.9704956,
+        "longitude": 80.0412592,
+        "predicted_image": "predicted/exp/20250605084132_image4.png"
+    },
+    {
+        "image": "20250605084153_image4.png",
+        "prediction": "Pothole",
+        "latitude": 12.9704956,
+        "longitude": 80.0412592,
+        "predicted_image": "predicted/exp/20250605084153_image4.png"
+    },
+    {
+        "image": "20250605084308_image7.webp",
+        "prediction": "Other Damage",
+        "latitude": 12.9704956,
+        "longitude": 80.0412592,
+        "predicted_image": "predicted/exp/20250605084308_image7.webp"
+    },
+    {
+        "image": "20250605084310_image7.webp",
+        "prediction": "Other Damage",
+        "latitude": 12.9704956,
+        "longitude": 80.0412592,
+        "predicted_image": "predicted/exp/20250605084310_image7.webp"
+    },
+    {
+        "image": "20250605084435_image4.png",
+        "prediction": "Pothole",
+        "latitude": 12.9704956,
+        "longitude": 80.0412592,
+        "predicted_image": "predicted/exp/20250605084435_image4.png"
+    },
+    {
+        "image": "20250605135134_WhatsApp_Image_2025-06-05_at_13.50.09_78c0b5bd.jpg",
+        "prediction": "Pothole",
+        "latitude": 12.971522554169372,
+        "longitude": 80.0426106213436,
+        "predicted_image": "predicted/exp/20250605135134_WhatsApp_Image_2025-06-05_at_13.50.09_78c0b5bd.jpg"
+    },
+    {
+        "image": "20250605135155_WhatsApp_Image_2025-06-05_at_13.50.09_62397baa.jpg",
+        "prediction": "Pothole",
+        "latitude": 12.971522554169372,
+        "longitude": 80.0426106213436,
+        "predicted_image": "predicted/exp/20250605135155_WhatsApp_Image_2025-06-05_at_13.50.09_62397baa.jpg"
+    },
+    {
+        "image": "20250605135222_WhatsApp_Image_2025-06-05_at_13.50.09_274056cb.jpg",
+        "prediction": "No Damage Detected",
+        "latitude": 12.971522554169372,
+        "longitude": 80.0426106213436,
+        "predicted_image": "predicted/exp/20250605135222_WhatsApp_Image_2025-06-05_at_13.50.09_274056cb.jpg"
+    },
+    {
+        "image": "20250605135254_WhatsApp_Image_2025-06-05_at_13.50.09_ecd85a34.jpg",
+        "prediction": "No Damage Detected",
+        "latitude": 12.971522554169372,
+        "longitude": 80.0426106213436,
+        "predicted_image": "predicted/exp/20250605135254_WhatsApp_Image_2025-06-05_at_13.50.09_ecd85a34.jpg"
+    },
+    {
+        "image": "20250605135300_WhatsApp_Image_2025-06-05_at_13.50.09_ecd85a34.jpg",
+        "prediction": "No Damage Detected",
+        "latitude": 12.971522554169372,
+        "longitude": 80.0426106213436,
+        "predicted_image": "predicted/exp/20250605135300_WhatsApp_Image_2025-06-05_at_13.50.09_ecd85a34.jpg"
+    },
+    {
+        "image": "20250605135314_WhatsApp_Image_2025-06-05_at_13.50.10_c1003f7f.jpg",
+        "prediction": "Pothole",
+        "latitude": 12.971522554169372,
+        "longitude": 80.0426106213436,
+        "predicted_image": "predicted/exp/20250605135314_WhatsApp_Image_2025-06-05_at_13.50.10_c1003f7f.jpg"
+    },
+    {
+        "image": "20250605214314_WhatsApp_Image_2025-06-05_at_13.50.09_62397baa.jpg",
+        "prediction": "Pothole",
+        "latitude": 13.07152971072985,
+        "longitude": 80.26581172201767,
+        "predicted_image": "predicted/exp/20250605214314_WhatsApp_Image_2025-06-05_at_13.50.09_62397baa.jpg"
+    },
+    {
+        "image": "20250605214451_WhatsApp_Image_2025-06-05_at_13.50.09_62397baa.jpg",
+        "prediction": "Pothole",
+        "latitude": 13.0721006,
+        "longitude": 80.2659387,
+        "predicted_image": "predicted/exp/20250605214451_WhatsApp_Image_2025-06-05_at_13.50.09_62397baa.jpg"
+    },
+    {
+        "image": "20250613004705_WhatsApp_Image_2025-06-05_at_13.50.09_ecd85a34.jpg",
+        "prediction": "No Damage Detected",
+        "latitude": 13.071581520779407,
+        "longitude": 80.26574013111147,
+        "predicted_image": "predicted/exp/20250613004705_WhatsApp_Image_2025-06-05_at_13.50.09_ecd85a34.jpg"
+    },
+    {
+        "image": "20250613004709_WhatsApp_Image_2025-06-05_at_13.50.09_ecd85a34.jpg",
+        "prediction": "No Damage Detected",
+        "latitude": 13.071581520779407,
+        "longitude": 80.26574013111147,
+        "predicted_image": "predicted/exp/20250613004709_WhatsApp_Image_2025-06-05_at_13.50.09_ecd85a34.jpg"
+    },
+    {
+        "image": "20250613004728_WhatsApp_Image_2025-06-05_at_13.50.09_78c0b5bd.jpg",
+        "prediction": "Pothole",
+        "latitude": 13.071581520779407,
+        "longitude": 80.26574013111147,
+        "predicted_image": "predicted/exp/20250613004728_WhatsApp_Image_2025-06-05_at_13.50.09_78c0b5bd.jpg"
     }
 ]
