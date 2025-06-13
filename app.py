@@ -12,9 +12,9 @@ if sys.platform == "win32":
 
 # Append YOLO path
 sys.path.append('yolov5')
-from yolov5.detect import run
 
-# from detect import run  # Assuming your yolov5/detect.py is correct
+
+from detect import run  # Assuming your yolov5/detect.py is correct
 
 # Flask App Setup
 app = Flask(__name__)
