@@ -113,7 +113,8 @@ def reports():
     with open(REPORTS_FILE, 'r') as f:
         return jsonify(json.load(f))
 
-if __name__ == '__main__':
-   # app.run(debug=True)
-    port = int(os.environ.get("PORT", 10000))  # Render sets PORT
-    app.run(host="0.0.0.0", port=port)
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port, debug=True)
