@@ -6,7 +6,7 @@ import os
 import warnings
 from pathlib import Path
 
-import pkg_resources as pkg
+import importlib.metadata as pkg
 import torch
 
 from utils.general import LOGGER, colorstr, cv2
