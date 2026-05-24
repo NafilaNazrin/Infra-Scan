@@ -75,7 +75,7 @@ def upload():
         save_txt=True,
         save_conf=True,
         save_crop=False,
-
+        imgsz=320,
         project='static/results',
         name='predict',
 
