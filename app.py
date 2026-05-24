@@ -69,12 +69,16 @@ def upload():
     run(
         weights=WEIGHTS_PATH,
         source=image_path,
-        project=app.config['PREDICT_FOLDER'],
-        name='exp',
+        #project=app.config['PREDICT_FOLDER'],
+        #name='exp',
         exist_ok=True,
         save_txt=True,
         save_conf=True,
         save_crop=False,
+
+        project='static/results',
+        name='predict',
+
     )
 
     # Find prediction result image
@@ -113,8 +117,5 @@ def reports():
     with open(REPORTS_FILE, 'r') as f:
         return jsonify(json.load(f))
 
-
-
-if __name__ == "__main__":
-    port = int(os.environ["PORT"])  # <-- no default here!
-    app.run(host="0.0.0.0", port=port, debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
