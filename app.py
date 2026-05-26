@@ -84,7 +84,7 @@ def upload():
         run(
             weights=WEIGHTS_PATH,
             source=image_path,
-            imgsz=256,
+            imgsz=(256, 256),
             device='cpu',
             save_txt=True,
             save_conf=True,
